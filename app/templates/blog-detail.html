@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% import 'macros.html' as macro %}
+
+{% block content %}
+
+<div class="container-fluid blog">
+    <div class="row">
+        <div class="col-md-5">
+
+            {{ wtf.quick_form(com_form) }}
+
+            <h2>Comments</h2>
+            <hr>
+            {{ macro.commentsTaken(one_com) }}
+        </div>
+        <div class="col-md-7">
+            <h2>Circle</h2>
+            <p>The .rounded-circle class shapes the image to a circle:</p>
+            <img src="cinqueterre.jpg" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+            <div class="center-text">
+                <h1>{{ one_blog.title }}</h1>
+                <hr>
+                <h3>By:{{ one_blog.author }}</h3>
+                <p class="text-center fs-3">{{ one_blog.blog_content }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
