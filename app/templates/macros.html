@@ -1,0 +1,49 @@
+{% macro BlogsOfTheDay(blog_list) %}
+
+    {% for blog in blog_list or []  %}
+    <div class="col-md-4">
+    <div class="card bg-dark text-dark">
+        <img src="" class="card-img" alt="">
+        <div class="card-img-overlay">
+          <h5 class="card-title">{{ blog.title }}</h5>
+          <cite> written on: {{ blog.date.strftime('%Y-%m-%d %H:%M') }}</cite>
+          <p class="card-text">{{ blog.blog_write }}.</p>
+          <p class="card-text">{{ blog.author }}</p>
+          <a href="{{ url_for('main.details',id = blog.id) }}" class="btn btn-primary">View blog</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endmacro %}
+
+
+{% macro updateBlogs(blogs) %}
+
+
+  {% for blog in blogs or [] %}
+      <div class="col-md-4">
+
+
+
+      </div>
+  {%  endfor %}
+
+
+{% endmacro %}
+
+{% macro commentsTaken(comments) %}
+
+  {% for comment in comments %}
+  <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+    <div class="card-header">{{ comment.list.username }}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ comment.blog.title }}</h5>
+      <p class="card-text">{{ comment.com_write }}</p>
+    </div>
+  </div>
+  {% endfor %}
+
+{% endmacro %}
+
+
