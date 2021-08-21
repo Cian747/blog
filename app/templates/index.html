@@ -3,6 +3,12 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
+
 {% block content %}
 <div class="contaner-fluid">
   <div class="card bg-dark text-white">
@@ -15,16 +21,16 @@
     </div>
   </div>
 
-  {% for quote in quotes or [] %}
+ 
   <figure class="text-center">
     <blockquote class="blockquote">
-      <p>{{ quote.quote }}</p>
+      <p>{{ quotes.quote }}</p>
     </blockquote>
     <figcaption class="blockquote-footer">
-      {{ quote.author }} <cite title="Source Title">Source Title</cite>
+      <cite title="Source Title">{{ quotes.author }} </cite>
     </figcaption>
   </figure>
-  {% endfor %}
+  
   <div class="row">
 
     <div class="col-md-6">

@@ -1,4 +1,4 @@
-class Quotes:
+class Quote:
     '''
     Generate the news in from a a country
     '''

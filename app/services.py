@@ -1,4 +1,4 @@
-from app.models.quotes import Quotes
+from app.models.quotes import Quote
 import urllib.request,json
 
 
@@ -10,42 +10,29 @@ def configure_request(app):
     quote_url = app.config['QUOTE_BASE_URL']
 
 
-
 def get_quote():
     '''
     Function that gets the json response to our url request
     '''
-    # get_news_url = quote_url
+    get_news_url = quote_url
 
-    # with urllib.request.urlopen(get_news_url) as url:
-    #     get_quote_data = url.read()
-    #     get_quote_response = json.loads(get_quote_data)
+    with urllib.request.urlopen(get_news_url) as url:
+        get_quote_data = url.read()
+        get_quote_response = json.loads(get_quote_data)
 
-    #     quote_results = None
+    if get_quote_response:
+        author  = get_quote_response.get('author')
+        quote  = get_quote_response.get('quote')
 
-    #     quote_results = process_results(get_quote_response)
+        quote = Quote(author, quote)
+        return quote
+    else:
+        author = 'Eric(TheHipHopPreacher)'
+        quote = 'Be phenomenal or be forgotten'
+        
+        quote = Quote(author, quote)
+        return quote
 
 
-    # return quote_results
 
-
-def process_results(quote_list):
-    '''
-    Function  that processes the news result and transform them to a list of Objects
-
-    Args:
-        news_list: A list of dictionaries that contain news details
-
-    Returns :
-        news_results: A list of news objects
-    '''
-    quote_results = []
-    for quote_item in quote_list:
-        author = quote_item.get('author')
-        quote = quote_item.get('quote')
-
-        quote_object = Quotes(author,quote)
-        quote_results.append(quote_object)
-
-    return quote_results
 

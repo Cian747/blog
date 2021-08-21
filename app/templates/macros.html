@@ -7,7 +7,7 @@
         <div class="card-img-overlay">
           <h5 class="card-title">{{ blog.title }}</h5>
           <cite> written on: {{ blog.date.strftime('%Y-%m-%d %H:%M') }}</cite>
-          <p class="card-text">{{ blog.blog_write }}.</p>
+          <p class="card-text text-center">{{ blog.blog_write }}.</p>
           <p class="card-text">{{ blog.author }}</p>
           <a href="{{ url_for('main.details',id = blog.id) }}" class="btn btn-primary">View blog</a>
         </div>
@@ -18,13 +18,19 @@
 {% endmacro %}
 
 
-{% macro updateBlogs(blogs) %}
+{% macro userBlogs(blogs) %}
 
 
   {% for blog in blogs or [] %}
-      <div class="col-md-4">
-
-
+      <div class="col-md-6">
+        <div class="card text-dark bg-light mb-3" style="max-width: 25rem;">
+          <div class="card-header">{{ blog.title }}</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ blog.author }}</h5>
+            <p class="card-text">{{ blog.blog_write | truncate(250) }}.</p>
+            <a href="{{ url_for('main.details',id = blog.id) }}" class="btn btn-primary">View blog</a>
+          </div>
+        </div>
 
       </div>
   {%  endfor %}

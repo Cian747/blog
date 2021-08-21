@@ -2,7 +2,7 @@ from app.services import get_quote
 from flask import render_template,request,redirect,url_for,abort
 from app.models.user import User
 from app.models.blog import Blog
-from .forms import BlogForm,CommentForm
+from .forms import BlogForm,CommentForm,UpdateProfile
 from app.models.comment import Comment
 from app import db,photos
 from . import main
@@ -15,7 +15,17 @@ def landing():
     landig/welcoming page
     '''
 
+    title = 'Dusk-App'
+    return render_template('landing.html', title=title)
+
+@main.route('/home', methods=['GET', 'POST'])
+def home():
+    '''
+    User landing page/Welcome page
+    '''
     quotes = get_quote()
+
+    # first_blog = Blog.sort(reverse=True).all()
 
     blogs = Blog.query.all()
 
@@ -27,17 +37,8 @@ def landing():
             db.session.commit()
             return redirect(url_for('main.landing'))
 
-    title = 'Dusk-App'
-    return render_template('index.html', title=title,blogs=blogs,blog_form=blog_form, quotes=quotes)
-
-@main.route('/home', methods=['GET', 'POST'])
-def home():
-    '''
-    User landing page/Welcome page
-    '''
-
     title = "Dusk"
-    return render_template('index.html',title = title)
+    return render_template('index.html',title = title, blog_form = blog_form, quotes = quotes,blogs = blogs)
 
 @main.route('/blogs/', methods=['GET', 'POST'])
 def blogs():
@@ -103,6 +104,67 @@ def delete_comment(id):
     db.session.commit()
 
     return redirect(url_for('main.details', id = one_com.blog_id))
+
+@main.route('/create-blog',methods=['GET', 'POST'])
+@login_required
+def create_blog():
+    '''
+    create blog
+    '''
+    blog_form = BlogForm()
+
+    if blog_form.validate_on_submit():
+            new_blog = Blog(author = blog_form.author.data,title = blog_form.title.data,blog_write = blog_form.blog.data,user = current_user)
+            db.session.add(new_blog)
+            db.session.commit()
+            return redirect(url_for('main.blogs'))
+
+    return render_template('create-blog.html', blog_form = blog_form)
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    blogs = Blog.query.filter_by(user = current_user).all()
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user,blogs = blogs)
+
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+    title = f'{current_user.username}'
+    return render_template('profile/update.html',form =form, title=title)
+
+@main.route('/user/<uname>/update/pic',methods= ['GET','POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if request.method == 'POST':
+        if request.files:
+            if 'photo' in request.files:
+                    filename = photos.save(request.files['photo'])
+                    path = f'photos/{filename}'
+                    user.profile_pic_path = path
+                    print(user.profile_pic_path)
+                    db.session.add(user)
+                    db.session.commit()
+                    
+    return redirect(url_for('main.profile',uname=uname))
 
 
 

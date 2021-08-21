@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
+{% block content %}
+<h1>Background picture</h1>
+<div class="button d-flex">
+    <a href="{{ url_for('auth.register') }}"><button class="btn btn-secondary">Register</button></a>
+    <a href="{{ url_for('auth.login') }}"><button class="btn btn-secondary">Login</button></a>
+</div>
+
+{% endblock %}
