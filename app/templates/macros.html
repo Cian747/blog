@@ -40,6 +40,9 @@
     <div class="card-body">
       <h5 class="card-title">{{ comment.blog.title }}</h5>
       <p class="card-text">{{ comment.com_write }}</p>
+      <cite class= "card-text">{{ comment.posted.strftime('%Y-%m-%d %H:%M') }}</cite><br>
+      <a href="{{ url_for('main.delete_comment',id = comment.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+      </a>
     </div>
   </div>
   {% endfor %}
