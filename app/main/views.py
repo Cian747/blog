@@ -1,3 +1,4 @@
+from app.services import get_quote
 from flask import render_template,request,redirect,url_for,abort
 from app.models.user import User
 from app.models.blog import Blog
@@ -14,6 +15,8 @@ def landing():
     landig/welcoming page
     '''
 
+    quotes = get_quote()
+
     blogs = Blog.query.all()
 
     blog_form = BlogForm()
@@ -25,7 +28,7 @@ def landing():
             return redirect(url_for('main.landing'))
 
     title = 'Dusk-App'
-    return render_template('index.html', title=title,blogs=blogs,blog_form=blog_form)
+    return render_template('index.html', title=title,blogs=blogs,blog_form=blog_form, quotes=quotes)
 
 @main.route('/home', methods=['GET', 'POST'])
 def home():
@@ -90,14 +93,16 @@ def delete_blog(id):
     db.session.commit()
     return redirect(url_for('main.blogs'))
 
-@main.route('/blogs/delete/comment')
+@main.route('/blogs/comment/<int:id>')
 def delete_comment(id):
     '''
     Delete a comment
     '''
-    one_com = Comment.query.filter_by(blog_id = id).first()
+    one_com = Comment.query.filter_by(id = id).first()
     db.session.delete(one_com)
     db.session.commit()
 
-    return redirect(url_for('main.details',id = id))
+    return redirect(url_for('main.details', id = one_com.blog_id))
+
+
 
