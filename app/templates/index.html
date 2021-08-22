@@ -5,24 +5,52 @@
 
 {% block styles %}
 {{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
 {% endblock %}
 
 
 {% block content %}
-<div class="contaner-fluid">
-  <div class="card bg-dark text-white">
-    <img src="" class="card-img" alt="">
-    <div class="card-img-overlay">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-        content. This content is a little bit longer.</p>
-      <p class="card-text">Last updated 3 mins ago</p>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../static/images/fonsi-fernandez-TMHuqRmdsuw-unsplash.jpg" class="d-block w-100" alt="..." height="400">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Welcome to the Dusk blog app</h5>
+        <p>View,create and inspire to learn from the best</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="../static/images/farouk-mechedal-iWmfPbKmxEQ-unsplash.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Create your first blog here</h5>
+        <a href=""><button class='btn btn-primary'>Create a blog</button></a>
+      </div>
     </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
- 
-  <figure class="text-center">
+
+  <figure class="text-center" class="quote">
     <blockquote class="blockquote">
       <p>{{ quotes.quote }}</p>
     </blockquote>
@@ -30,7 +58,7 @@
       <cite title="Source Title">{{ quotes.author }} </cite>
     </figcaption>
   </figure>
-  
+
   <div class="row">
 
     <div class="col-md-6">
@@ -67,7 +95,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="row">
@@ -89,28 +116,19 @@
 
             {% for blog in blogs %}
             <tr>
-                <th scope="row">{{ blog.id }}</th>
-                <td>{{blog.title}}</td>
-                <td>{{blog.blog_write | truncate(12)}}</td>
-                <td>{{ blog.date.strftime('%Y-%m-%d %H:%M') }}</td>
-                <td>{{blog.author}}</td>
-                <td>
-                   <a href="{{ url_for('main.details',id = blog.id) }}"><button type="button" class="btn btn-sm btn-primary">View blog</button></a>
-                </td>
+              <th scope="row">{{ blog.id }}</th>
+              <td>{{blog.title}}</td>
+              <td>{{blog.blog_write | truncate(12)}}</td>
+              <td>{{ blog.date.strftime('%Y-%m-%d %H:%M') }}</td>
+              <td>{{blog.author}}</td>
+              <td>
+                <a href="{{ url_for('main.details',id = blog.id) }}"><button type="button"
+                    class="btn btn-sm btn-primary">View blog</button></a>
+              </td>
             </tr>
-            {%  endfor %}
-            
-          </tbody>
-          <div class="d-grid gap-2">
-            <a href="{{ url_for('main.blogs') }}"><button type="button" name="" id="" class="btn btn-secondary"> Send
-                it</button></a>
-          </div>
-      </div>
-      <div class="col-md-6">
-        <h1> Start your blog journey </h1>
-        <hr>
-        {{ wtf.quick_form(blog_form) }}
+            {% endfor %}
 
+          </tbody>
       </div>
 
     </div>

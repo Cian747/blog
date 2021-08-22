@@ -24,7 +24,7 @@ class Config:
     SIMPLEMDE_USE_CDN = True
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://cian:ms254@localhost/watchlist_test'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://cian:ms254@localhost/blog_test'
 
 class ProdConfig(Config):
     '''

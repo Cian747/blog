@@ -12,3 +12,9 @@ class Blog(db.Model):
     blog_write = db.Column(db.String())
     date = db.Column(db.DateTime,default=datetime.now())
     comments = db.relationship('Comment', backref='blog',lazy="dynamic")
+
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    

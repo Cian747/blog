@@ -1,9 +1,11 @@
+from app.email import mail_message
 from app.services import get_quote
 from flask import render_template,request,redirect,url_for,abort
 from app.models.user import User
 from app.models.blog import Blog
-from .forms import BlogForm,CommentForm,UpdateProfile
+from .forms import BlogForm,CommentForm,UpdateProfile,SubscriptionForm
 from app.models.comment import Comment
+from app.models.subscriber import Subscribe
 from app import db,photos
 from . import main
 from flask_login import login_required,current_user
@@ -80,7 +82,7 @@ def details(id):
 
         return redirect(url_for('main.details', id = one_blog.id))
     
-    return render_template('blog-detail.html', com_form = com_form, one_blog = one_blog, one_com = one_com)
+    return render_template('blog-detail.html', com_form = com_form, one_blog = one_blog, one_com = one_com,user = current_user)
 
 
 @main.route('/blogs/<int:id>', methods=['GET', 'POST'])
@@ -117,9 +119,26 @@ def create_blog():
             new_blog = Blog(author = blog_form.author.data,title = blog_form.title.data,blog_write = blog_form.blog.data,user = current_user)
             db.session.add(new_blog)
             db.session.commit()
+
+            subscribers = Subscribe.query.all()
+
+            for subscriber in subscribers:
+                mail_message('New Blog Posted','email/postAlert/post_alert',subscriber.subscriber, blog = new_blog)
+
+
             return redirect(url_for('main.blogs'))
 
-    return render_template('create-blog.html', blog_form = blog_form)
+    sub_form = SubscriptionForm()
+
+    if sub_form.validate_on_submit():
+        new_subscriber = Subscribe(subscriber = sub_form.email.data)
+        db.session.add(new_subscriber)
+        db.session.commit()
+
+        mail_message('Welcome to the Dusk Family','email/subscribe/new_subscribe',new_subscriber.subscriber,subscriber = new_subscriber)
+
+
+    return render_template('create-blog.html', blog_form = blog_form,sub_form=sub_form)
 
 @main.route('/user/<uname>')
 def profile(uname):

@@ -3,14 +3,31 @@
 
 {% block styles %}
 {{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
 {% endblock %}
 
 {% block content %}
-<h1>Background picture</h1>
-<div class="button d-flex">
-    <a href="{{ url_for('auth.register') }}"><button class="btn btn-secondary">Register</button></a>
-    <a href="{{ url_for('auth.login') }}"><button class="btn btn-secondary">Login</button></a>
+<div class="container-fluid landing">
+    <div class="row">
+        <div class="col-md-6">
+
+            <img src="../static/images/subscriber_vabu.svg" alt="" width="600rem">
+
+        </div>
+        <div class="col-md-6">
+            <div class="welcome mt-5">
+                <h1 class="fs-2">DUSK</h1>
+                <div class="card-body">
+                    <h5>Welcome to Dusk</h5>
+                    <p>Here at dusk we pride ourselves in encouraging and showing our users how
+                        they could improve themselves. We teach,create and alert the user if and when a new blog is
+                        posted. We allow our users to choose whichever category they want their blog to represent.</p>
+                    <a href="{{ url_for('auth.register') }}"><button class="btn btn-primary">Register</button></a>
+                    <a href="{{ url_for('auth.login') }}"><button class="btn btn-success">Login</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
