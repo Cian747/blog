@@ -1,12 +1,13 @@
 import os
+import secrets
 
 class Config:
     '''
     General configuration parent class
     '''
+    SECRET_KEY = secrets.token_hex(16)
     QUOTE_BASE_URL ='http://quotes.stormconsultancy.co.uk/random.json'
     MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
-    SECRET_KEY = os.environ.get('SECRET_KEY')
 
     # Photos path
     UPLOADED_PHOTOS_DEST ='app/static/photos'

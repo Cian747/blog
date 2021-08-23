@@ -21,7 +21,7 @@
         </div >
         <div class="col-md-7">
             {% if current_user.is_authenticated %}
-            <img src="{{url_for( 'static',filename = 'user.profile_pic_path' )}}" class="rounded-circle" alt="Cinque Terre" style="align-items:center;" width="304" height="330">
+            <img src="{{url_for( 'static',filename = user.profile_pic_path )}}" class="rounded-circle" alt="Cinque Terre" style="align-items:center;" width="304" height="330">
             {% else %}
             <img src="../static/images/avataaars.png" class="rounded-circle" alt="Cinque Terre" width="304" height="350">
             {% endif %}

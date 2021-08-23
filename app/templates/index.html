@@ -10,56 +10,61 @@
 
 
 {% block content %}
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<div class="container-fluid">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../static/images/tamara-malaniy-6ESa8xOHF3U-unsplash.jpg" class="d-block w-100" alt="..."
+          height="500">
+        <div class="carousel-caption d-none d-md-block text-dark fs-2">
+          <h3>Welcome to the Dusk blog app</h3>
+          <p>View,create and inspire to learn from the best</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../static/images/tamara-malaniy-3eEu_B8gu-c-unsplash.jpg" class="d-block w-100" alt="..." height="500">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>See some of the latest blogs</h5>
+          <a href="{{ url_for('main.blogs') }}"><button class="btn btn-primary" >See blogs</button></a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../static/images/farouk-mechedal-iWmfPbKmxEQ-unsplash.jpg" class="d-block w-100" alt="..." height="500">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Create your first blog here</h5>
+          <a href="{{ url_for('main.create_blog') }}"><button class='btn btn-primary'>Create a blog</button></a>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="../static/images/fonsi-fernandez-TMHuqRmdsuw-unsplash.jpg" class="d-block w-100" alt="..." height="400">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Welcome to the Dusk blog app</h5>
-        <p>View,create and inspire to learn from the best</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="../static/images/farouk-mechedal-iWmfPbKmxEQ-unsplash.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Create your first blog here</h5>
-        <a href=""><button class='btn btn-primary'>Create a blog</button></a>
-      </div>
-    </div>
+
+  <div class="quote">
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <p>{{ quotes.quote }}</p>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        <cite title="Source Title">{{ quotes.author }} </cite>
+      </figcaption>
+    </figure>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-
-  <figure class="text-center" class="quote">
-    <blockquote class="blockquote">
-      <p>{{ quotes.quote }}</p>
-    </blockquote>
-    <figcaption class="blockquote-footer">
-      <cite title="Source Title">{{ quotes.author }} </cite>
-    </figcaption>
-  </figure>
-
-  <div class="row">
+  <!-- <div class="row">
 
     <div class="col-md-6">
       <div class="card mb-3" style="max-width: 540px;">
@@ -96,60 +101,59 @@
         </div>
       </div>
     </div>
+  </div> -->
 
-    <div class="row">
-      <div class="col-md-6">
-        <h1>Latest Blogs</h1>
-        <hr>
-        <table class="table table-dark table-hover">
-          <thead>
-            <tr class="table-dark">
-              <th scope="col">#</th>
-              <th scope="col">Topic</th>
-              <th scope="col">Blog</th>
-              <th scope="col">Date</th>
-              <th scope="col">Author</th>
-              <th scope="col">Read details</th>
-            </tr>
-          </thead>
-          <tbody>
+  <div class="row-cols-md-6">
+    <h1>Latest Blogs</h1>
+    <hr>
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">#</th>
+          <th scope="col">Topic</th>
+          <th scope="col">Blog</th>
+          <th scope="col">Date</th>
+          <th scope="col">Author</th>
+          <th scope="col">Read details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for blog in blogs %}
+        <tr>
+          <th scope="row">{{ blog.id }}</th>
+          <td>{{blog.title}}</td>
+          <td>{{blog.blog_write | truncate(12)}}</td>
+          <td>{{ blog.date.strftime('%Y-%m-%d %H:%M') }}</td>
+          <td>{{blog.author}}</td>
+          <td>
+            <a href="{{ url_for('main.details',id = blog.id) }}"><button type="button"
+                class="btn btn-sm btn-primary">View blog</button></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </div>
+  <div class="col-md-8">
 
-            {% for blog in blogs %}
-            <tr>
-              <th scope="row">{{ blog.id }}</th>
-              <td>{{blog.title}}</td>
-              <td>{{blog.blog_write | truncate(12)}}</td>
-              <td>{{ blog.date.strftime('%Y-%m-%d %H:%M') }}</td>
-              <td>{{blog.author}}</td>
-              <td>
-                <a href="{{ url_for('main.details',id = blog.id) }}"><button type="button"
-                    class="btn btn-sm btn-primary">View blog</button></a>
-              </td>
-            </tr>
-            {% endfor %}
-
-          </tbody>
-      </div>
-
+    <div class="about">
+      <h2>About Us</h2>
+      <p>Dusk was started in early 2020 as pandemic had just hit. Before got to learn about our application we were
+        ust sharing and posting about the daily news concerning the pandemic. The lack of public attention
+        encouraged
+        us to diversify and be as versatile as possible.</p>
+      <p>Our breaking point concerned the police brutality that spread around the world concerning an officer
+        beating
+        a kenyan citizen senseless for being a few minutes late past curfew. It was after this that people reached
+        out
+        and wanted to share their stories through continuos blogging.</p>
+      <p>The rest is what you see here on the page we allow our users to freely express themselves and share that
+        with
+        the world.</p>
     </div>
+
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
-
 
 </div>
 {% endblock %}

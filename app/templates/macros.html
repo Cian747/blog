@@ -1,19 +1,23 @@
 {% macro BlogsOfTheDay(blog_list) %}
 
-    {% for blog in blog_list or []  %}
-    <div class="col-md-4">
-    <div class="card bg-dark text-dark">
-        <img src="" class="card-img" alt="">
-        <div class="card-img-overlay">
-          <h5 class="card-title">{{ blog.title }}</h5>
-          <cite> written on: {{ blog.date.strftime('%Y-%m-%d %H:%M') }}</cite>
-          <p class="card-text text-center">{{ blog.blog_write }}.</p>
-          <p class="card-text">{{ blog.author }}</p>
-          <a href="{{ url_for('main.details',id = blog.id) }}" class="btn btn-primary">View blog</a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
+{% for blog in blog_list or [] %}
+
+<div class="col-md-4">
+  <div class="blogs">
+    {% if blog.user.profile_pic_path %}
+    <img src="{{url_for( 'static',filename = blog.user.profile_pic_path )}}" class="rounded-circle" alt="Cinque Terre" style="align-items:center;" width="304" height="330">
+    {% else %}
+    <img src="../static/images/avataaars.png" class="rounded-circle" alt="Cinque Terre" width="304" height="350">
+    {% endif %}
+    <h5 class="text-center">{{ blog.title | capitalize }}</h5>
+    <p class=" text-center">{{ blog.blog_write | truncate(150) }}.</p>
+    <p class="">{{ blog.author }}</p>
+    <cite> written on: {{ blog.date.strftime('%Y-%m-%d %H:%M') }}</cite><br>
+    <a href="{{ url_for('main.details',id = blog.id) }}" class="btn btn-primary">View blog</a>
+  </div>
+</div>
+
+{% endfor %}
 
 {% endmacro %}
 
@@ -21,38 +25,37 @@
 {% macro userBlogs(blogs) %}
 
 
-  {% for blog in blogs or [] %}
-      <div class="col-md-6">
-        <div class="card text-dark bg-light mb-3" style="max-width: 25rem;">
-          <div class="card-header">{{ blog.title }}</div>
-          <div class="card-body">
-            <h5 class="card-title">{{ blog.author }}</h5>
-            <p class="card-text">{{ blog.blog_write | truncate(250) }}.</p>
-            <a href="{{ url_for('main.details',id = blog.id) }}" class="btn btn-primary">View blog</a>
-          </div>
-        </div>
+{% for blog in blogs or [] %}
+<div class="col-md-6">
+  <div class="card text-dark bg-light mb-3" style="max-width: 25rem;">
+    <div class="card-header">{{ blog.title }}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ blog.author }}</h5>
+      <p class="card-text">{{ blog.blog_write | truncate(250) }}.</p>
+      <a href="{{ url_for('main.details',id = blog.id) }}" class="btn btn-primary">View blog</a>
+    </div>
+  </div>
 
-      </div>
-  {%  endfor %}
+</div>
+{% endfor %}
 
 
 {% endmacro %}
 
 {% macro commentsTaken(comments) %}
 
-  {% for comment in comments %}
-  <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-    <div class="card-header">{{ comment.list.username }}</div>
-    <div class="card-body">
-      <h5 class="card-title">{{ comment.blog.title }}</h5>
-      <p class="card-text">{{ comment.com_write }}</p>
-      <cite class= "card-text">{{ comment.posted.strftime('%Y-%m-%d %H:%M') }}</cite><br>
-      <a href="{{ url_for('main.delete_comment',id = comment.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
-      </a>
-    </div>
+{% for comment in comments %}
+<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+  <div class="card-header">{{ comment.list.username }}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{ comment.blog.title }}</h5>
+    <p class="card-text">{{ comment.com_write }}</p>
+    <cite class="card-text">{{ comment.posted.strftime('%Y-%m-%d %H:%M') }}</cite><br>
+    <a href="{{ url_for('main.delete_comment',id = comment.id) }}"><button type="button"
+        class="btn btn-danger">Delete</button></a>
+    </a>
   </div>
-  {% endfor %}
+</div>
+{% endfor %}
 
 {% endmacro %}
-
-

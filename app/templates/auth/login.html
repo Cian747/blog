@@ -6,7 +6,7 @@
     <div class="row">
       <div class= "col-md-6 mt-5"> 
 
-        <img src="https://assets.umso.co/1/online_friends_x73e.svg" alt="" width="550rem">
+        <img src="https://assets.umso.co/1/online_friends_x73e.svg" alt="" width="550rem" height="300">
 
       </div>
       <div class="col-md-6">
@@ -18,7 +18,10 @@
         </div>
       {% endfor %}
       <!-- Login form -->
+      <div class="login">
+        <h1 class="text-center">Dusk</h1>
       {{wtf.quick_form(login_form)}}
+      </div>
       <p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
      </div>
     </div>
