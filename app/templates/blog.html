@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block styles %}
 {{ super() }}
@@ -9,15 +10,19 @@
 
 {% block content %}
 <div class="container-fluid blog">
-  <div class="blog-images">
+  <div class="blog-images"> 
 
     <img src="../static/images/group_chat_v059.svg" alt="" height="600"  class="center">
 
   </div>
 
-  <!-- Will have a macro down here -->
+  <div class="subscribe text-center">
+    <h2>Subscribe to our blog service</h2>
+
+    {{ wtf.quick_form(sub_form) }}
 
   <div class="row">
+
 
     {{ macro.BlogsOfTheDay(blogs) }}
 

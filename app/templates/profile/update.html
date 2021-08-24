@@ -7,14 +7,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <form action="/u" class='d-flex'>
+<div class="container update">
 
-    {{ form.hidden_tag() }}
-    {{ form.bio.label }}
-    {{ form.bio }}
-    <input type="submit" value="Post" class="btn btn-primary">
-  </form>
-  <!-- {{wtf.quick_form(form)}} -->
+  {{wtf.quick_form(form)}}
 </div>
 {% endblock %}

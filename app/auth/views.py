@@ -20,7 +20,7 @@ def login():
 
         flash('Invalid username or Password')
 
-    title = "watchlist login"
+    title = "Dusk login"
     return render_template('auth/login.html',login_form = login_form,title = title)
 
 

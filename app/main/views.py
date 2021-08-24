@@ -10,6 +10,7 @@ from app import db,photos
 from . import main
 from flask_login import login_required,current_user
 import markdown2 
+from sqlalchemy import desc
 
 @main.route('/', methods=['GET', 'POST'])
 def landing():
@@ -27,7 +28,8 @@ def home():
     '''
     quotes = get_quote()
 
-    # first_blog = Blog.sort(reverse=True).all()
+    first_blog = Blog.query.order_by(Blog.id.desc()).all()
+
 
     blogs = Blog.query.all()
 
@@ -40,7 +42,7 @@ def home():
             return redirect(url_for('main.landing'))
 
     title = "Dusk"
-    return render_template('index.html',title = title, blog_form = blog_form, quotes = quotes,blogs = blogs)
+    return render_template('index.html',title = title, blog_form = blog_form, quotes = quotes,first_blog = first_blog)
 
 @main.route('/blogs/', methods=['GET', 'POST'])
 def blogs():
@@ -57,10 +59,20 @@ def blogs():
             db.session.commit()
             return redirect(url_for('main.blogs'))
 
+    sub_form = SubscriptionForm()
+
+    if sub_form.validate_on_submit():
+        new_subscriber = Subscribe(subscriber = sub_form.email.data)
+        db.session.add(new_subscriber)
+        db.session.commit()
+
+        mail_message('Welcome to the Dusk Family','email/subscribe/new_subscribe',new_subscriber.subscriber,subscriber = new_subscriber)
+        return redirect(url_for('main.blogs'))
+
 
     title = 'Dusk - Blog posts'
 
-    return render_template('blog.html',blog_form = blog_form , blogs = blogs , title = title)
+    return render_template('blog.html',blog_form = blog_form , blogs = blogs , title = title, sub_form = sub_form)
 
 @main.route('/blogs/details/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -128,17 +140,8 @@ def create_blog():
 
             return redirect(url_for('main.blogs'))
 
-    sub_form = SubscriptionForm()
 
-    if sub_form.validate_on_submit():
-        new_subscriber = Subscribe(subscriber = sub_form.email.data)
-        db.session.add(new_subscriber)
-        db.session.commit()
-
-        mail_message('Welcome to the Dusk Family','email/subscribe/new_subscribe',new_subscriber.subscriber,subscriber = new_subscriber)
-
-
-    return render_template('create-blog.html', blog_form = blog_form,sub_form=sub_form)
+    return render_template('create-blog.html', blog_form = blog_form)
 
 @main.route('/user/<uname>')
 def profile(uname):

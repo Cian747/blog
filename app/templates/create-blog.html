@@ -10,26 +10,15 @@
 
 {% block content %}
 
-<div class="container-fluid">
 <div class="row">
-<div class="col-md-7">
-  {{ wtf.quick_form(blog_form) }}  
-</div>
-<div class="col-md-5">
-  <!-- <form action="/create-blog" method="post"> 
-    {{ sub_form.hidden_tag() }}
-    {{ sub_form.email.label }}
-    {{ sub_form.email }} -->
+  <div class="col-md-2"></div>
+  <div class="col-md-8" id="create-blog">
+    <h2 class="text-center">Write <span class="text-primary">here</span></h2>
+    {{ wtf.quick_form(blog_form) }}
+  </div>
+  <div class="col-md-2">
 
-
-    {{ wtf.quick_form(sub_form) }}
-
-    <!-- <input type="submit" value="Submit" class="btn btn-primary">
-  </form> -->
-</div>
-</div>
-
-
+  </div>
 </div>
 
 

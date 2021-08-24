@@ -6,7 +6,6 @@
 .container-fluid{
 
     padding: 0;
-    /* background-color:#0C171C; */
 
 }
 
@@ -20,7 +19,9 @@
 .about{
     padding: 10px;
     border: 1px solid grey;
+    height: 400px;
     margin: 1rem;
+    font-size:20px;
 
 }
 
@@ -37,9 +38,29 @@
 
 }
 
+#create-blog{
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-top:3rem;
+    background-color: white;
+
+}
+
+.login i{
+
+    font-size: 60px;
+}
+
+.container-fluid .create{
+
+    background-color:#EDF6F9;
+    /* color:white; */
+    padding:5px;
+}
+
 h1 , h2{
 
-    font-family: 'Kaushan Script', cursive;
+    font-family: 'Lemon', cursive;
     text-decoration: underline;
 
 }
@@ -59,12 +80,33 @@ p {
 
 }
 
+.signin-card{
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color:#0C171C;
+    color: white;
+    border-radius: 4px;
+
+}
+
+.container .update{
+
+    background-image: url(https://images.unsplash.com/photo-1504805572947-34fad45aed93?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
+    background-size: cover;
+
+}
+
+.container .register{
+
+    background-image: url();
+
+}
+
 .blog-images{
 
   margin-left: 10rem;
 
 }
-
 
 
 .blogs{

@@ -7,7 +7,11 @@ from app.models.subscriber import Subscribe
 from  flask_migrate import Migrate, MigrateCommand
 
 # Creating app instance
-app = create_app('development')
+app = create_app('production')
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 manager = Manager(app)
 

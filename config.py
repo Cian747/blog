@@ -7,7 +7,6 @@ class Config:
     '''
     SECRET_KEY = os.environ.get('SECRET_KEY')
     QUOTE_BASE_URL ='http://quotes.stormconsultancy.co.uk/random.json'
-    MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
 
     # Photos path
     UPLOADED_PHOTOS_DEST ='app/static/photos'
@@ -35,7 +34,7 @@ class ProdConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get("SQL_DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("SQL_URI")
 
 class DevConfig(Config):
     '''

@@ -2,12 +2,13 @@
 {% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
-<div class="container">
+<div class="container register">
 <div class="row">
 <div class="col-md-2"> </div>
 <div class="col-md-8">
-
-{{ wtf.quick_form(registration_form) }}
+    <div class="signin-card px-4 py-2 mt-4" width="12rem">
+        <h1 class="fw-heavy text-center mb-4">DU<span class="text-primary">SK</span></h1>
+        {{ wtf.quick_form(registration_form) }}
 
 </div>
 <div class="col-md-2"></div>
@@ -15,3 +16,49 @@
 </div>
 
 {% endblock%}
+
+
+
+
+
+    <!-- <p class="fw-heavy">Fill in the fields to create an account</p>
+    <form class="d-flex flex-column justify-content-center align-items-center" action="/register" method="post">
+        {{registration_form.hidden_tag()}}
+        <div class="mb-2">
+            <div class="mb-2">
+                <div class="fw-bold text-capitalize mb-2">
+                    {{registration_form.email.label}}
+                </div>
+                <div>
+                    {{registration_form.email(size=30, class_="form-control" )}}
+                </div>
+            </div>
+        <div class="mb-2">
+            <div class="fw-bold text-capitalize mb-2">
+                {{registration_form.username.label}}
+            </div>
+            <div>
+                {{registration_form.username(size=30, class_="form-control" )}}
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="fw-bold text-capitalize mb-2">
+                {{registration_form.password.label}}
+            </div> 
+            <div>
+                {{registration_form.password(size=30, class_="form-control")}}
+            </div>
+        </div>
+        <div>
+        <div class="mt-2">
+            <div class="fw-bold text-capitalize mb-2">
+                {{registration_form.password_confirm.label}}
+            </div> 
+            <div>
+                {{registration_form.password_confirm(size=30, class_="form-control")}}
+            </div>
+        </div>
+        <div>
+            <input class = "btn btn-primary mt-2" type="submit" value="Create an account">
+        </div>
+    </form> -->
