@@ -5,7 +5,7 @@ class Config:
     '''
     General configuration parent class
     '''
-    SECRET_KEY = secrets.token_hex(16)
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     QUOTE_BASE_URL ='http://quotes.stormconsultancy.co.uk/random.json'
     MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
 
@@ -36,9 +36,6 @@ class ProdConfig(Config):
     '''
 
     SQLALCHEMY_DATABASE_URI = os.environ.get("SQL_DATABASE_URL")
-
-    pass
-
 
 class DevConfig(Config):
     '''
